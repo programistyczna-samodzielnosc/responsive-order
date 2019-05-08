@@ -1,37 +1,85 @@
 <html>
+
 <head>
     <title>Kolejnosc elementow i responsywność</title>
     <style>
         .jungle {
-            display:flex
+            display: flex;
+            align-items: center;
         }
+
         .animal {
-            flex:1;
-            order:100;
-            font-size:48px;
+            order: 0;
+            flex: 1;
+            font-size: 24px;
+            border:1px solid red;
+            border-radius:10px;
+            padding:10px;
+            text-align:center;
+            height:200px;
         }
-        .animal-elephant {
-            order:1;
+
+        img {
+            width:100px;
+            display:block;
+            margin: 0 auto;
         }
-    
-        @media (min-width:640px) {
-            .animal-giraffe {
-                order: 1
-            }
-            .animal-elephant {
-                order:100;
-            }
-        }
-       
     </style>
+    <script>
+        function App() {
+            let animals = Array.from(document.querySelectorAll('.animal'))
+            let currentOrders = animals.map(animal => {
+                    animal.style.order=0;
+                    return animal.style.order
+            })
+            function setMinOrder() {
+                animals = Array.from(document.querySelectorAll('.animal'))
+                let animalCount = animals.length;
+                currentOrders = animals.map(animal => animal.style.order)
+
+                let minOrder = Math.min(...currentOrders)
+                let maxOrder = Math.max(...currentOrders)
+
+                let firstAnimal = animals.findIndex(animal => { 
+                    return animal.style.order == minOrder
+                })
+                animals[firstAnimal].style.order = maxOrder + 1;
+
+
+                //znajdz najmniejszy order i najwiekszy
+                //ustaw najmniejszy order na najwiekszy +1
+                console.log('animals', animals)
+            }
+
+            App.setMinOrder = setMinOrder
+
+            function roll() {
+                setTimeout(function(){
+                    setMinOrder()
+                    return roll();
+                },2000)
+
+                
+            }
+
+            roll()
+
+
+        }
+
+        window.onload = App
+    </script>
 </head>
+
 <body>
     <div class="jungle">
-        <div class="animal animal-tiger">Tiger</div>
-        <div class="animal animal-boa">Boa</div>
-        <div class="animal animal-monkey">Monkey</div>
-        <div class="animal animal-elephant">Elephant</div>
-        <div class="animal animal-giraffe">Giraffe</div>
+        <div class="animal animal-tiger">1. Tiger <img src="animals/tiger.jpg" alt=""></div>
+        <div class="animal animal-boa">2. Boa<img src="animals/boa.jpg" alt=""></div>
+        <div class="animal animal-monkey">3. Monkey<img src="animals/monkey.jpg" alt=""></div>
+        <div class="animal animal-elephant">4. Elephant<img src="animals/elephant.jpg" alt=""></div>
+        <div class="animal animal-giraffe">5. Giraffe<img src="animals/giraffe.jpg" alt=""></div>
+        <div class="animal animal-cheetah">6. Cheetah<img src="animals/cheetah.jpg" alt=""></div>
     </div>
 </body>
+
 </html>
