@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>Kolejnosc elementow i responsywność</title>
+    <style>
+        .jungle {
+            display:flex
+        }
+        .animal {
+            flex:1;
+            order:100;
+            font-size:48px;
+        }
+        .animal-elephant {
+            order:1;
+        }
+    
+        @media (min-width:640px) {
+            .animal-giraffe {
+                order: 1
+            }
+            .animal-elephant {
+                order:100;
+            }
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="jungle">
+        <div class="animal animal-tiger">Tiger</div>
+        <div class="animal animal-boa">Boa</div>
+        <div class="animal animal-monkey">Monkey</div>
+        <div class="animal animal-elephant">Elephant</div>
+        <div class="animal animal-giraffe">Giraffe</div>
+    </div>
+</body>
+</html>
